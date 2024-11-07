@@ -1,10 +1,10 @@
 Plugin Builder Results
 
 Your plugin ExportTabToCSV was created in:
-   C:/Users/Utent/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins/export_tab_to_csv
+    C:/Temp\export_tab_to_csv
 
 Your QGIS plugin directory is located at:
-    C:/Users/Utent/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins
+    C:/Users/Faustino/AppData/Roaming/QGIS/QGIS3/profiles/default/python/plugins
 
 What's Next:
 

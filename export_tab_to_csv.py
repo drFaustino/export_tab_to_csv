@@ -204,14 +204,37 @@ class ExportTabToCSV:
             #riga da aggiungere per collegare il pulsante di selezione del percorso del file CSV
             self.dlg.pushButton.clicked.connect(self.select_output_file)
 
+            # Popolamento iniziale dei ComboBox per il separatore di colonne e decimali
+            self.dlg.cmbox_col.addItems([";", ","])
+            self.dlg.cmbox_decim.addItems([",", "."])
+
+            # Funzione per gestire la selezione unica di separatore e decimale
+            def update_combo_boxes():
+                # Ottiene i simboli selezionati
+                col_sep = self.dlg.cmbox_col.currentText()
+                dec_sep = self.dlg.cmbox_decim.currentText()
+
+                # Impedisce che i simboli siano uguali
+                if col_sep == dec_sep:
+                    if self.dlg.cmbox_col.hasFocus():
+                        # Cambia il valore di cmbox_decim per evitare duplicati
+                        self.dlg.cmbox_decim.setCurrentIndex(1 if col_sep == "," else 0)
+                    elif self.dlg.cmbox_decim.hasFocus():
+                        # Cambia il valore di cmbox_col per evitare duplicati
+                        self.dlg.cmbox_col.setCurrentIndex(1 if dec_sep == ";" else 0)
+
+            # Collegamento dei ComboBox alla funzione di controllo
+            self.dlg.cmbox_col.currentIndexChanged.connect(update_combo_boxes)
+            self.dlg.cmbox_decim.currentIndexChanged.connect(update_combo_boxes)
+
         # righe da aggiungere per creare la lista dei layer da visulizzare nel comboBox di Qt Designer
         layers = QgsProject.instance().layerTreeRoot().children()
         # Cancella il contenuto nel comboBox e in lineEdit al primo avvio
-        self.dlg.comboBox.clear()
+        self.dlg.cmbox_vector.clear()
         self.dlg.lineEdit.clear()
 
         # Popola la comboBox con i nomi di tutti i layer caricati in QGIS
-        self.dlg.comboBox.addItems([layer.name() for layer in layers])
+        self.dlg.cmbox_vector.addItems([layer.name() for layer in layers])
 
         # show the dialog
         self.dlg.show()
@@ -219,25 +242,28 @@ class ExportTabToCSV:
         result = self.dlg.exec_()
         # See if OK was pressed
         if result:
-            # Do something useful here - delete the line containing pass and
-            # substitute with your code.
-            # da cancellare pass e inserire le seguenti righe di codice
+
+            #Recupera il simbolo scelto dall'utente
+            column_separator = self.dlg.cmbox_col.currentText()
+            decimal_symbol = self.dlg.cmbox_decim.currentText()
+        
             # nome del file da recuperare dall'oggetto lineEdit di Qt Designer
             filename=self.dlg.lineEdit.text()
 
             # crea il file csv, aprilo e scrivici i dati degli attributi
             with open(filename, 'w') as output_file:
-                selectedLayerIndex = self.dlg.comboBox.currentIndex()
+                selectedLayerIndex = self.dlg.cmbox_vector.currentIndex()
                 selectedLayer = layers[selectedLayerIndex].layer()
                 fieldnames = [field.name() for field in selectedLayer.fields()]
                
                 # scrivi le intestazioni e vai a capo
-                line = ','.join(name for name in fieldnames) + '\n'
+                line = column_separator.join(name for name in fieldnames) + '\n'
                 output_file.write(line)
 
                 # scrivi gli attributi della feature
                 for f in selectedLayer.getFeatures():
-                    line = ','.join(str(f[name]) for name in fieldnames) + '\n'
+                    values = [str(f[name]).replace('.', decimal_symbol) for name in fieldnames]
+                    line = column_separator.join(values) + '\n'
                     output_file.write(line)
 
             # mostra un messaggio in QGIS al termine del processo

@@ -6,14 +6,14 @@
 name=Esporta Tab su file CSV
 qgisMinimumVersion=3.38
 description=Esporta la tabella del layer vettoriale selezionato su un file CSV
-version=0.1
+version=0.2
 author=dr. Geol. Faustino Cetraro
 email=geol-faustino@libero.it
 
 about=Esporta gli tutti gli attributi di un layer vettoriale selezionato in un file CSV. Si seleziona il layer vettoriale dal menu e si indica il percorso di salvataggio del file CSV.
 
-tracker=http://bugs
-repository=http://repo
+tracker=https://github.com/drFaustino/export_tab_to_csv
+repository=https://github.com/drFaustino/export_tab_to_csv
 # End of mandatory metadata
 
 # Recommended items:
