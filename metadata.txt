@@ -6,7 +6,7 @@
 name=Esporta Tab su file CSV
 qgisMinimumVersion=3.38
 description=Esporta la tabella del layer vettoriale selezionato su un file CSV
-version=0.2
+version=0.3
 author=dr. Geol. Faustino Cetraro
 email=geol-faustino@libero.it
 
@@ -23,13 +23,13 @@ hasProcessingProvider=no
 # changelog=
 
 # Tags are comma separated with spaces allowed
-tags=python, esporta, csv, layer, vettore
+tags=esporta, csv, layer, vettore
 
-homepage=http://homepage
+homepage=https://github.com/drFaustino/export_tab_to_csv
 category=Vector
 icon=icon.png
 # experimental flag
-experimental=True
+experimental=False
 
 # deprecated flag (applies to the whole plugin, not just a single version)
 deprecated=False
@@ -40,7 +40,7 @@ deprecated=False
 # plugin_dependencies=
 
 Category of the plugin: Raster, Vector, Database or Web
-# category=
+# category=Vector
 
 # If the plugin can run on QGIS Server.
 server=False
