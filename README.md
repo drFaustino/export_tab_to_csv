@@ -8,3 +8,8 @@ The use is very simple, just load a layer in the QGIS project and start the plug
 Added two menus, one to assign the separator symbol for columns and the other menu for the decimal symbol.
 
 ![img2](https://github.com/user-attachments/assets/9306241f-56d6-4ff7-9ed0-24cb6b7c4144)
+
+# Update version 0.3
+Added progressbar
+
+![img3](https://github.com/user-attachments/assets/eb477a2c-810b-4687-bb66-c0f6fa20e343)
