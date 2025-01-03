@@ -91,7 +91,7 @@ class ExportTabToCSV:
             self.iface.removeToolBarIcon(action)
 
     def select_output_file(self):
-        filename, _filter = QFileDialog.getSaveFileName(self.dlg, "Select output file", "", '*.csv')
+        filename, _filter = QFileDialog.getSaveFileName(self.dlg, self.tr("Seleziona il file di output"), "", '*.csv')
         self.dlg.lineEdit.setText(filename)
 
     def run(self):
@@ -102,6 +102,10 @@ class ExportTabToCSV:
             self.dlg.pushButton.clicked.connect(self.select_output_file)
             self.dlg.cmbox_col.addItems([";", ","])
             self.dlg.cmbox_decim.addItems([",", "."])
+
+            # Traduzione e aggiornamento pulsanti
+            self.dlg.button_box.button(self.dlg.button_box.Ok).setText(self.tr("OK"))
+            self.dlg.button_box.button(self.dlg.button_box.Cancel).setText(self.tr("Annulla"))
 
             # Imposta progress bar per 0%
             self.dlg.progressBar.setValue(0)
@@ -155,7 +159,7 @@ class ExportTabToCSV:
                     self.dlg.progressBar.setValue(i + 1)
 
             self.iface.messageBar().pushMessage(
-                "Successo", "Il file CSV è stato scritto correttamente in " + filename,
+                self.tr("Successo"), self.tr("Il file CSV e' stato scritto correttamente in ") + filename,
                 level=Qgis.Success, duration=3)
             
             # Reset della progress bar
