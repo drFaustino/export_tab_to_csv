@@ -13,3 +13,6 @@ Added two menus, one to assign the separator symbol for columns and the other me
 Added progressbar
 
 ![img3](https://github.com/user-attachments/assets/eb477a2c-810b-4687-bb66-c0f6fa20e343)
+
+# Update verion 0.4
+Add file languages, English and Italian.
